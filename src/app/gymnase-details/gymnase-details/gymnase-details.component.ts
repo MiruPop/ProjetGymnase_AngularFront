@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { stringify } from 'querystring';
 import { Gymnase } from 'src/app/gymnase';
 import { GymnaseService } from 'src/app/service/gymnase.service';
 
@@ -16,11 +15,11 @@ export class GymnaseDetailsComponent implements OnInit {
   constructor(private gymnaseService : GymnaseService) { }
 
   ngOnInit(): void {
-    this.gymnaseService.getGymnaseByName(this.gym.nomGymnase).subscribe(
-      (data : string) => {
-        this.gym.nomGymnase = data;
-      }
-    );
+    // this.gymnaseService.getGymnaseByName(this.gym.nomGymnase).subscribe(
+    //   (data : Gymnase) => {
+    //     this.gym = data;
+    //   }
+    // );
   }
 
 }

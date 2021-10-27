@@ -8,32 +8,30 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class GymnaseService {
-  private gymnaseBaseUrl: string;
+  private gymnaseRoot: string;
 
-  constructor(
-    private httpClient : HttpClient
-    ) { 
-      this.gymnaseBaseUrl = 'http://localhost:9000/gymnase';
+  constructor(private httpClient : HttpClient) { 
+      this.gymnaseRoot = `${environment.API_URL}/gymnase`;
     }
 
   public getGymnases():Observable<Gymnase[]> {
-    return this.httpClient.get<Gymnase[]> (`${this.gymnaseBaseUrl}/liste`);
+    return this.httpClient.get<Gymnase[]> (`${this.gymnaseRoot}/liste`);
   }
 
   public addGymnases(gymnase:Gymnase):Observable<Gymnase> {
-    return this.httpClient.post<Gymnase> (`${this.gymnaseBaseUrl}/add`, gymnase);
+    return this.httpClient.post<Gymnase> (`${this.gymnaseRoot}/add`, gymnase);
   }
 
   public updateGymnases(gymnase:Gymnase):Observable<Gymnase> {
-    return this.httpClient.put<Gymnase> (`${this.gymnaseBaseUrl}/update`, gymnase);
+    return this.httpClient.put<Gymnase> (`${this.gymnaseRoot}/update`, gymnase);
   }
 
-  public deleteGymnases(id:number):Observable<void> {
-    return this.httpClient.delete<void> (`${this.gymnaseBaseUrl}/delete/${id}`);
+  public deleteGymnases(id:string):Observable<void> {
+    return this.httpClient.delete<void> (`${this.gymnaseRoot}/delete/${id}`);
   }
 
-  public getGymnaseByName(nomGymnase:string):Observable<Gymnase> {
-    return this.httpClient.delete<Gymnase> (`${this.gymnaseBaseUrl}/nom/${nomGymnase}`);
+  public getGymnaseById(id:string):Observable<Gymnase> {
+    return this.httpClient.delete<Gymnase> (`${this.gymnaseRoot}/nom/${id}`);
   }
 
 }

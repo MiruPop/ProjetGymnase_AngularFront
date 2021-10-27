@@ -4,3 +4,13 @@
     align-content: space-around;
     row-gap: 1em;
 }
+
+body {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: rgba(82, 108, 245, 0.64)
+}

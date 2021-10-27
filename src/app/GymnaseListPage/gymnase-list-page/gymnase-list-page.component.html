@@ -1,11 +1,135 @@
-<div class="col-12">
-    <div class="section-title text-center mb-4 pb-2">
-        <h4 class="title mb-4">Trouve ton gymnase !</h4>
-        <p class="text-muted para-desc mx-auto mb-0">Vous trouverez ici toutes les gymnases du département Seine-Saint-Denis</p>
+<div class="container" id="main-container">
+    <!-- Bouton add = trigger MODALE -->
+    <div class="d-grid gap-2">
+        <a (click)="onOpenModal(null, 'add')" data-placement="top" data-original-title="add"><button
+                class="btn btn-outline-dark tooltips">Ajouter un
+                nouveau gymnase</button></a>
     </div>
-</div><!--end col-->
-<div class="d-flex list-card">
-    <div *ngFor="let gymnase of gymnases">
-        <app-card [gymnase]="gymnase"></app-card>
+
+    <!-- header -->
+    <div class="col-12">
+        <div class="section-title text-center mb-4 pb-2">
+            <h4 class="title mb-4">Trouve ton gymnase !</h4>
+            <p class="text-muted para-desc mx-auto mb-0">Vous trouverez ici toutes les gymnases du département
+                Seine-Saint-Denis</p>
+        </div>
+    </div>
+
+    <!-- card -->
+    <div class="d-flex list-card">
+
+        <div *ngFor="let gymnase of gymnases">
+            <app-card [gymnase]="gymnase"></app-card>
+            <div class="actions">
+                <a (click)="onOpenModal(gymnase, 'update')" data-placement="top" data-original-title="update"><button  class="btn btn-outline-dark tooltips">Modifier</button></a>
+                <a (click)="onOpenModal(gymnase, 'delete')" data-placement="top" data-original-title="delete"><button  class="btn btn-outline-dark tooltips">Retirer</button></a>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- MODALE ADD GYMNASE -->
+<div class="modal fade" id="addGymnaseModal" tabindex="-1" role="dialog" aria-labelledby="addGymnaseModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addGymnaseModalLabel">Ajouter un gymnase</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #addForm="ngForm" (ngSubmit)="onAddGymnase(addForm)">
+                    <!-- !!! Pour que le formulaire marche il faut absolument que les
+                        <input>aient l'attribut name=<même nom qu'attributs modèle> -->
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" ngModel name="nomGymnase" class="form-control" id="nom" placeholder="Nom salle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adresse">Adresse</label>
+                        <input type="text" ngModel name="adresse" class="form-control" id="adresse" placeholder="Adresse">
+                    </div>
+                    <div class="form-group">
+                        <label for="ville">Ville</label>
+                        <input type="text" ngModel name="ville" class="form-control" id="ville" placeholder="Ville">
+                    </div>
+                    <div class="form-group">
+                        <label for="surface">Surface</label>
+                        <input type="text" ngModel name="surface" class="form-control" id="surface" placeholder="Surface (m2)">
+                    </div>
+                    <!-- CLOSE / SUBMIT -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="add-gym-close" data-dismiss="modal">Fermer</button>
+                        <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Sauvegarder</button>
+                        <!-- le bouton est disables tant que le formulaire n'est pas valide, c'est à dire les champs "required" sont remplis -->
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- MODALE UPDATE GYMNASE -->
+<div class="modal fade" id="updateGymnaseModal" tabindex="-1" role="dialog" aria-labelledby="updateGymnaseModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateGymnaseModalLabel">Modifier les informations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" name="nomGymnase" class="form-control" id="nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adresse">Adresse</label>
+                        <input type="text" name="adresse" class="form-control" id="adresse">
+                    </div>
+                    <div class="form-group">
+                        <label for="ville">Ville</label>
+                        <input type="text" name="ville" class="form-control" id="ville">
+                    </div>
+                    <div class="form-group">
+                        <label for="surface">Surface</label>
+                        <input type="text" name="surface" class="form-control" id="surface">
+                    </div>
+                    <!-- CLOSE / SUBMIT -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <!-- <button (click)="onUpdateGymnase(gymnase:Gymnase)" type="submit" class="btn btn-primary">Sauvegarder</button> -->
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODALE DELETE GYMNASE -->
+<div class="modal fade" id="deleteGymnaseModal" tabindex="-1" role="dialog" aria-labelledby="deleteGymnaseModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteGymnaseModalLabel">Supprimer ce gymnase ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>ATTENTION !!! Une donée supprimée ne peut plus être récupérée...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                <button type="button" class="btn btn-danger">Oui</button>
+            </div>
+        </div>
     </div>
 </div>

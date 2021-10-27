@@ -9,6 +9,7 @@ import { AccueilComponent } from './accueil/accueil/accueil.component';
 import { GymnaseListPageComponent } from './GymnaseListPage/gymnase-list-page/gymnase-list-page.component';
 import { CardComponent } from './card/card/card.component';
 import { GymnaseDetailsComponent } from './gymnase-details/gymnase-details/gymnase-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { GymnaseDetailsComponent } from './gymnase-details/gymnase-details/gymna
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

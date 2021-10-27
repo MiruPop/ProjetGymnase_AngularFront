@@ -1,8 +1,12 @@
-<div class="card" style="width: 18rem;">
+<div class="card card-box" style="width: 18rem;">
     <div class="card-body">
-        <h5 class="card-title">{{gymnase.nomGymnase}}</h5>
-        <p class="card-text">{{gymnase.adresse}}</p>
-        <p class="card-text">{{gymnase.ville}}</p>
-        <a href="http://localhost:9000/gymnase/nom/{{gymnase.nomGymnase}}" class="btn btn-primary">Détails</a>
+        <h5 class="card-title">{{gymnase?.nomGymnase}}</h5>
+        <p class="card-text">{{gymnase?.adresse}}</p>
+        <p class="card-text">{{gymnase?.ville}}</p>
+        <div class="card-link">
+            <a href="http://localhost:4200/gymnase/nom/{{gymnase?.nomGymnase}}" class="c-link">Voir fiche
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
     </div>
 </div>
