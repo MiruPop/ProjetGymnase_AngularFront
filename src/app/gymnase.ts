@@ -7,5 +7,6 @@ export interface Gymnase {
 	adresse:string;
 	ville:string;
 	surface:number;
-	seances:Array<Seance>;
+	// seances:Array<Seance>;
+	seances:Seance[];
 }
