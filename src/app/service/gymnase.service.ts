@@ -30,6 +30,10 @@ export class GymnaseService {
     return this.httpClient.delete<void> (`${this.gymnaseRoot}/delete/${id}`);
   }
 
+  // public deleteGymnases(gymnase:Gymnase):Observable<void> {
+  //   return this.httpClient.delete<void> (`${this.gymnaseRoot}/delete`);
+  // }
+
   public getGymnaseById(id:string):Observable<Gymnase> {
     return this.httpClient.delete<Gymnase> (`${this.gymnaseRoot}/nom/${id}`);
   }

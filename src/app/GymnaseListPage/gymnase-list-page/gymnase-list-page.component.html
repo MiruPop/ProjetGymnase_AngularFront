@@ -1,3 +1,4 @@
+<!-- CARD CONTAINER -->
 <div class="container" id="main-container">
     <!-- Bouton add = trigger MODALE -->
     <div class="d-grid gap-2">
@@ -19,13 +20,28 @@
     <div class="d-flex list-card">
 
         <div *ngFor="let gymnase of gymnases">
-            <app-card [gymnase]="gymnase"></app-card>
-            <div class="actions">
-                <a (click)="onOpenModal(gymnase, 'update')" data-placement="top" data-original-title="update"><button  class="btn btn-outline-dark tooltips">Modifier</button></a>
-                <a (click)="onOpenModal(gymnase, 'delete')" data-placement="top" data-original-title="delete"><button  class="btn btn-outline-dark tooltips">Retirer</button></a>
+            <!-- <app-card [gymnase]="gymnase"></app-card> -->
+
+            <div class="card card-box" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{gymnase?.nomGymnase}}</h5>
+                    <p class="card-text">{{gymnase?.adresse}}</p>
+                    <p class="card-text">{{gymnase?.ville}}</p>
+                    <div class="card-link">
+                        <a href="http://localhost:4200/gymnase/nom/{{gymnase?.nomGymnase}}" class="c-link">Voir fiche
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                        <div class="actions">
+                            <a (click)="onOpenModal(gymnase, 'update')" data-placement="top" data-original-title="update"><button
+                                    class="btn btn-outline-dark tooltips">Modifier</button></a>
+                            <a (click)="onOpenModal(gymnase, 'delete')" data-placement="top" data-original-title="delete"><button
+                                    class="btn btn-outline-dark tooltips">Retirer</button></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 
@@ -46,11 +62,13 @@
                         <input>aient l'attribut name=<même nom qu'attributs modèle> -->
                     <div class="form-group">
                         <label for="nom">Nom</label>
-                        <input type="text" ngModel name="nomGymnase" class="form-control" id="nom" placeholder="Nom salle" required>
+                        <input type="text" ngModel name="nomGymnase" class="form-control" id="nom"
+                            placeholder="Nom salle" required>
                     </div>
                     <div class="form-group">
                         <label for="adresse">Adresse</label>
-                        <input type="text" ngModel name="adresse" class="form-control" id="adresse" placeholder="Adresse">
+                        <input type="text" ngModel name="adresse" class="form-control" id="adresse"
+                            placeholder="Adresse">
                     </div>
                     <div class="form-group">
                         <label for="ville">Ville</label>
@@ -58,17 +76,19 @@
                     </div>
                     <div class="form-group">
                         <label for="surface">Surface</label>
-                        <input type="text" ngModel name="surface" class="form-control" id="surface" placeholder="Surface (m2)">
+                        <input type="text" ngModel name="surface" class="form-control" id="surface"
+                            placeholder="Surface (m2)">
                     </div>
                     <!-- CLOSE / SUBMIT -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="add-gym-close" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-secondary" id="add-gym-close"
+                            data-dismiss="modal">Fermer</button>
                         <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Sauvegarder</button>
                         <!-- le bouton est disables tant que le formulaire n'est pas valide, c'est à dire les champs "required" sont remplis -->
                     </div>
                 </form>
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -84,28 +104,32 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form #updateForm="ngForm">
+                    <input type="hidden" ngModel="{{updateGymnase?.id}}" name="id" class="form-control" id="id">
+                    <input type="hidden" ngModel="{{updateGymnase?.idGymnase}}" name="idGymnase" class="form-control" id="idGymnase">
                     <div class="form-group">
                         <label for="nom">Nom</label>
-                        <input type="text" name="nomGymnase" class="form-control" id="nom" required>
+                        <!-- ngModel pour faire le lien avec la méthode onUpdateGymnase -->
+                        <input type="text" ngModel="{{updateGymnase?.nomGymnase}}" name="nomGymnase" class="form-control" id="nom" required>
                     </div>
                     <div class="form-group">
                         <label for="adresse">Adresse</label>
-                        <input type="text" name="adresse" class="form-control" id="adresse">
+                        <input type="text" ngModel="{{updateGymnase?.adresse}}" name="adresse" class="form-control" id="adresse">
                     </div>
                     <div class="form-group">
                         <label for="ville">Ville</label>
-                        <input type="text" name="ville" class="form-control" id="ville">
+                        <input type="text" ngModel="{{updateGymnase?.ville}}" name="ville" class="form-control" id="ville">
                     </div>
                     <div class="form-group">
                         <label for="surface">Surface</label>
-                        <input type="text" name="surface" class="form-control" id="surface">
+                        <input type="text" ngModel="{{updateGymnase?.surface}}" name="surface" class="form-control" id="surface">
                     </div>
+                    <input type="hidden" ngModel="{{updateGymnase?.seances}}" name="seances" class="form-control" id="seance">
                     <!-- CLOSE / SUBMIT -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <!-- <button (click)="onUpdateGymnase(gymnase:Gymnase)" type="submit" class="btn btn-primary">Sauvegarder</button> -->
-                        
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"id="update-gym-close">Fermer</button>
+                        <button (click)="onUpdateGymnase(updateForm.value)" type="submit" class="btn btn-primary">Sauvegarder</button>
+
                     </div>
                 </form>
             </div>
@@ -128,7 +152,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                <button type="button" class="btn btn-danger">Oui</button>
+                <button (click)="onDeleteGymnase(deletedGymnase?.id)" type="button" class="btn btn-danger">Oui</button>
+                <!-- (click) est un listener -->
             </div>
         </div>
     </div>

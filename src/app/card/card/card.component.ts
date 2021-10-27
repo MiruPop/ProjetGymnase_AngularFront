@@ -15,20 +15,4 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  //   public onOpenModal(gymnase: Gymnase, mode: string): void {
-  //   const container = document.getElementById('main-container');
-  //   const button = document.createElement('button');
-  //   button.type = 'button';
-  //   button.style.display = 'none';
-  //   button.setAttribute('data-toggle', 'modal');
-  //   if (mode === 'update') {
-  //     button.setAttribute('data-target', '#updateGymnaseModal');
-  //   }
-  //   if (mode === 'delete') {
-  //     button.setAttribute('data-target', '#deleteGymnaseModal');
-  //   }
-  //   container?.appendChild(button);
-  //   button.click();
-  // }
 }

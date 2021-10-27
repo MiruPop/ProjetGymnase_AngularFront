@@ -11,9 +11,11 @@ import { GymnaseService } from 'src/app/service/gymnase.service';
   styleUrls: ['./gymnase-list-page.component.css']
 })
 export class GymnaseListPageComponent implements OnInit {
+  @Input() gymProp : any;
 
   public gymnases: Gymnase[] | undefined;
-  public updateGymnase!: Gymnase;
+  public updateGymnase!: Gymnase; //c'est cette variable qui va faire le binding avec le formulaire
+  public deletedGymnase!: Gymnase;
 
   constructor(private gymnaseService: GymnaseService) {
   }
@@ -33,7 +35,7 @@ export class GymnaseListPageComponent implements OnInit {
   }
 
   //bouton "générique" et caché, qui sert de base à tous les boutons de la page, en ouvrant une modale
-  public onOpenModal(gymnase: Gymnase | null, mode: string): void {
+  public onOpenModal(gymnase: Gymnase, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
@@ -43,9 +45,11 @@ export class GymnaseListPageComponent implements OnInit {
       button.setAttribute('data-target', '#addGymnaseModal');
     }
     if (mode === 'update') {
+      this.updateGymnase = gymnase;
       button.setAttribute('data-target', '#updateGymnaseModal');
     }
     if (mode === 'delete') {
+      this.deletedGymnase = gymnase;
       button.setAttribute('data-target', '#deleteGymnaseModal');
     }
     container?.appendChild(button);
@@ -60,18 +64,33 @@ export class GymnaseListPageComponent implements OnInit {
         console.log(response);
 
         this.getGymnaseList();
+        addForm.reset();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
+        addForm.reset();
       });
     // addForm.value va retourner un document en format json
   }
 
   public onUpdateGymnase(gymnase:Gymnase): void {
+    //la ligne suivante permet de fermer la modale une fois le bouton "Sauvegarder" clické
+    document.getElementById('update-gym-close')?.click();
     this.gymnaseService.updateGymnases(gymnase).subscribe(
       (response: Gymnase) => {
         console.log(response);
 
+        this.getGymnaseList();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      });
+  }
+
+  public onDeleteGymnase(id:string): void {
+    this.gymnaseService.deleteGymnases(id).subscribe(
+      (response: void) => {
+        console.log(response);
         this.getGymnaseList();
       },
       (error: HttpErrorResponse) => {
