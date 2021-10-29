@@ -1,9 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { Gymnase } from 'src/app/gymnase';
 import { GymnaseService } from 'src/app/service/gymnase.service';
+import { Gymnase } from '../models/gymnase';
 
 @Component({
   selector: 'app-gymnase-list-page',
@@ -88,6 +87,7 @@ export class GymnaseListPageComponent implements OnInit {
   }
 
   public onDeleteGymnase(id:string): void {
+    document.getElementById('delete-gym-close')?.click();
     this.gymnaseService.deleteGymnases(id).subscribe(
       (response: void) => {
         console.log(response);

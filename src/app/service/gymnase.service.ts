@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Gymnase } from '../gymnase';
 import { environment } from 'src/environments/environment';
+import { Gymnase } from '../models/gymnase';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +29,6 @@ export class GymnaseService {
   public deleteGymnases(id:string):Observable<void> {
     return this.httpClient.delete<void> (`${this.gymnaseRoot}/delete/${id}`);
   }
-
-  // public deleteGymnases(gymnase:Gymnase):Observable<void> {
-  //   return this.httpClient.delete<void> (`${this.gymnaseRoot}/delete`);
-  // }
 
   public getGymnaseById(id:string):Observable<Gymnase> {
     return this.httpClient.delete<Gymnase> (`${this.gymnaseRoot}/nom/${id}`);

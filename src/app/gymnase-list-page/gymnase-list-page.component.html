@@ -127,7 +127,7 @@
                     <input type="hidden" ngModel="{{updateGymnase?.seances}}" name="seances" class="form-control" id="seance">
                     <!-- CLOSE / SUBMIT -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"id="update-gym-close">Fermer</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="update-gym-close">Fermer</button>
                         <button (click)="onUpdateGymnase(updateForm.value)" type="submit" class="btn btn-primary">Sauvegarder</button>
 
                     </div>
@@ -151,7 +151,7 @@
                 <p>ATTENTION !!! Une donée supprimée ne peut plus être récupérée...</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"  id="delete-gym-close">Non</button>
                 <button (click)="onDeleteGymnase(deletedGymnase?.id)" type="button" class="btn btn-danger">Oui</button>
                 <!-- (click) est un listener -->
             </div>
